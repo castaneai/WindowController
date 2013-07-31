@@ -93,7 +93,7 @@ namespace WindowController
         /// <param name="windowHandle"></param>
         public void BringWindowToTopWithoutActivation()
         {
-            NativeCall.SetWindowPos(this.handle, (IntPtr)NativeCall.SpecialWindowHandles.HWND_TOPMOST, 0, 0, 0, 0,
+            NativeCall.SetWindowPos(this.handle, (IntPtr)NativeCall.SpecialWindowHandles.HWND_TOP, 0, 0, 0, 0,
                 NativeCall.SetWindowPosFlags.SWP_NOACTIVATE |
                 NativeCall.SetWindowPosFlags.SWP_NOMOVE |
                 NativeCall.SetWindowPosFlags.SWP_NOSIZE |
