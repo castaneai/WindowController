@@ -54,6 +54,8 @@ namespace WindowController
 			// ウィンドウが最小化されていた場合、もとに戻す
 			// （ウィンドウが最小化されていると座標を取得できないから）
 			this.Restore();
+            // ウィンドウを最前面に表示する（アクティブにはしない）
+            this.BringWindowToTopWithoutActivation();
 
 			// クライアント領域の左上のスクリーン座標を取得
 			NativeCall.POINT screenPoint = new NativeCall.POINT(0, 0);
@@ -84,5 +86,20 @@ namespace WindowController
 			}
 			return bitmap;
 		}
+
+        /// <summary>
+        /// 指定したウィンドウをアクティブにせずに最前面に表示する
+        /// </summary>
+        /// <param name="windowHandle"></param>
+        public void BringWindowToTopWithoutActivation()
+        {
+            NativeCall.SetWindowPos(this.handle, (IntPtr)NativeCall.SpecialWindowHandles.HWND_TOPMOST, 0, 0, 0, 0,
+                NativeCall.SetWindowPosFlags.SWP_NOACTIVATE |
+                NativeCall.SetWindowPosFlags.SWP_NOMOVE |
+                NativeCall.SetWindowPosFlags.SWP_NOSIZE |
+                NativeCall.SetWindowPosFlags.SWP_NOSENDCHANGING |
+                NativeCall.SetWindowPosFlags.SWP_SHOWWINDOW
+            );
+        }
 	}
 }
